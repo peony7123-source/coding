@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파이썬 기초 - 커리큘럼</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            --primary-purple: #1e1b4b;
+            --bg-light: #f1f5f9; /* 밝은 배경색 */
+            --text-dark: #1e293b;
+            --accent-purple: #a78bfa;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        /* 히어로 섹션 */
+        .hero-section {
+            background-color: #f1f5f9; 
+            padding: 50px 20px 80px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-card {
+            background-color: var(--primary-purple);
+            width: 100%;
+            max-width: 900px;
+            border-radius: 24px;
+            padding: 35px 45px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-icon {
+            width: 70px;
+            height: auto;
+        }
+
+        .hero-info .level-tag {
+            color: var(--accent-purple);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .hero-info h1 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .hero-info p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin: 10px 0 20px;
+        }
+
+        .tag-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -40px auto 100px;
+            padding: 0 20px;
+        }
+
+        .chapter-container {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .chapter-header {
+            background: #fcfdfe;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        /* Chapter 01 색상 포인트 */
+        .chapter-container:nth-child(1) .chapter-header {
+            background: linear-gradient(to right, #eef2ff, #fcfdfe);
+            border-left: 5px solid #6366f1;
+        }
+
+        .chapter-header i {
+            margin-right: 12px;
+            font-style: normal;
+            font-size: 1.3rem;
+        }
+
+        .lesson-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 30px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+            font-size: 1rem;
+        }
+
+        .lesson-item:last-child { border-bottom: none; }
+        .lesson-item:hover { background-color: #f1f5f9; }
+
+        .lesson-icon {
+            margin-right: 15px;
+            color: #94a3b8;
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        .btn-open {
+            margin-left: auto;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6366f1;
+        }
+
+        .status-wait {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            background: #f8fafc;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero-section">
+        <div class="hero-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" class="hero-icon" alt="computer">
+            <div class="hero-info">
+                <div class="level-tag">LEVEL 6 · 파이썬</div>
+                <h1>파이썬 기초 (COS Pro 3·2급)</h1>
+                <p>드디어 진짜 코딩! 파이썬으로 실제 프로그램을 만들어 봐요.</p>
+                <div class="tag-group">
+                    <span class="tag">cos pro 3급</span>
+                    <span class="tag">cos pro 2급</span>
+                    <span class="tag">cos pro 1급</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        <div class="chapter-container">
+            <div class="chapter-header"><i>📁</i> Chapter 01. 터틀 그래픽</div>
+            <div class="lesson-list">
+                <a href="javascript:comingSoon('터틀 그래픽')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 터틀 그래픽 기초
+                    <span class="status-wait">준비중</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-header"><i>📁</i> Chapter 02. 입출력과 자료</div>
+            <div class="lesson-list">
+                <a href="CHAPTER02/01_print.html" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 화면에 출력하기 (print)
+                    <span class="btn-open">열기 ↗</span>
+                </a>
+                <a href="javascript:comingSoon('변수와 자료')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 변수와 자료
+                    <span class="status-wait">준비중</span>
+                </a>
+                <a href="javascript:comingSoon('입력')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 입력
+                    <span class="status-wait">준비중</span>
+                </a>
+                <a href="javascript:comingSoon('연산자')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 연산자
+                    <span class="status-wait">준비중</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-header"><i>📁</i> Chapter 03. 조건문</div>
+            <div class="lesson-list">
+                <a href="javascript:comingSoon('조건문')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 조건문 실습
+                    <span class="status-wait">준비중</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-header"><i>📁</i> Chapter 04. 반복문</div>
+            <div class="lesson-list">
+                <a href="javascript:comingSoon('while')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> while 반복문
+                    <span class="status-wait">준비중</span>
+                </a>
+                <a href="javascript:comingSoon('for')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> for 반복문
+                    <span class="status-wait">준비중</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="chapter-container">
+            <div class="chapter-header"><i>📁</i> Chapter 05. 자료구조</div>
+            <div class="lesson-list">
+                <a href="javascript:comingSoon('딕셔너리')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 딕셔너리
+                    <span class="status-wait">준비중</span>
+                </a>
+                <a href="javascript:comingSoon('세트')" class="lesson-item">
+                    <span class="lesson-icon">py.</span> 세트
+                    <span class="status-wait">준비중</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function comingSoon(name) {
+            alert("'" + name + "' 수업은 선생님이 곧 추가할 예정이에요! 👨‍💻");
+        }
+    </script>
+</body>
+</html>
