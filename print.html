@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 코딩 교실 - 출력 print()</title>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --bg: #f4f7f9;
+            --card: #ffffff;
+            --code-text: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: var(--bg);
+            color: #333;
+        }
+
+        /* 사이드바 */
+        nav {
+            width: 260px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e1e8ed;
+            position: fixed;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        nav h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 30px; }
+        nav ul { list-style: none; padding: 0; }
+        nav li { padding: 12px 15px; border-radius: 8px; margin-bottom: 5px; cursor: pointer; transition: 0.3s; color: #555; font-size: 0.95rem; }
+        nav li:hover { background: #f0f7ff; color: var(--primary); }
+        nav li.active { background: var(--primary); color: white; font-weight: 600; }
+
+        /* 메인 콘텐츠 */
+        main {
+            margin-left: 260px;
+            padding: 50px 80px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .header-tag { color: var(--primary); font-weight: bold; margin-bottom: 10px; }
+        h1 { font-size: 2.8rem; margin: 0 0 40px 0; }
+        h2 { font-size: 1.8rem; margin-top: 60px; border-left: 5px solid var(--primary); padding-left: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        h3 { font-size: 1.3rem; margin-top: 30px; color: #444; }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* 코드 및 결과 스타일 - VS Code Light 스타일 및 왼쪽 라인 추가 */
+        .code-container { margin: 20px 0; border: 1px solid #e1e8ed; border-radius: 12px; overflow: hidden; }
+        .code-header { background: #f3f3f3; padding: 10px 20px; border-bottom: 1px solid #e1e8ed; font-size: 0.85rem; color: #616161; }
+        .code-body { background: #ffffff; padding: 20px; font-family: 'Fira Code', monospace; line-height: 1.5; color: #000000; white-space: pre-wrap; border-left: 8px solid #1abc9c; }
+        .comment { color: #008000; font-style: italic; }
+
+        .btn-show { background: #f1f3f5; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+        .btn-show:hover { background: #dee2e6; }
+        .output-box { display: none; background: #f8f9fa; color: #333; padding: 15px 20px; border-radius: 8px; margin-top: 10px; font-family: monospace; font-size: 0.95rem; border: 1px solid #e1e8ed; }
+
+        /* 퀴즈 스타일 */
+        .quiz-card { background: #fffcf0; border: 1px solid #f9e79f; border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .quiz-title { display: flex; align-items: center; font-weight: bold; color: #9a7d0a; margin-bottom: 15px; }
+        .quiz-title::before { content: '🚀 Challenge'; margin-right: 10px; background: #f1c40f; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        .quiz-item { margin-bottom: 15px; list-style: none; line-height: 1.7; }
+
+        /* 인터랙티브 퀴즈 */
+        .interactive-quiz { background: #e8f8f5; border: 1px solid #a2d9ce; border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .q-row { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #a2d9ce; }
+        .q-row:last-child { border: none; }
+        .opt-btn { background: white; border: 1px solid #a2d9ce; padding: 5px 12px; border-radius: 20px; cursor: pointer; margin: 0 5px; transition: 0.3s; }
+        .opt-btn.correct { background: var(--success); color: white; border-color: var(--success); }
+        .opt-btn.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+
+        .info-box { background: #e8f4fd; border-radius: 12px; padding: 20px; margin: 20px 0; color: #2c3e50; }
+        code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>Python 학습</h2>
+        <ul>
+            <li class="active">1. 출력 print()</li>
+            <li>1) 문자열 출력 (1)</li>
+            <li>2) 문자열 출력 (2)</li>
+            <li>3) 숫자 출력하기</li>
+            <li>4) 숫자(연산식) 출력</li>
+            <li>5) 공백 출력하기</li>
+            <li>6) 이스케이프 코드</li>
+            <li>7) 인수 구분자 설정</li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="header-tag">Chapter 02. Basic</div>
+        <h1>1. 출력 print()</h1>
+
+        <section class="card">
+            <p>✅ <strong>print</strong>는 괄호 안의 메시지(인수)를 출력하는 명령어입니다.</p>
+            
+            <div class="code-container">
+                <div class="code-header">Python Code</div>
+                <div class="code-body"><span class="comment"># print는 괄호안의 메시지(인수)를 출력하는 명령어이다.</span>
+print("hello world")</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">hello world</div>
+
+            <div class="code-container">
+                <div class="code-header">Python Code</div>
+                <div class="code-body"><span class="comment"># 둘 이상의 인수를 넣을 경우, 쉼표(,)로 구분한다.</span>
+print("hello", "world")</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">hello world</div>
+
+            <div class="info-box">
+                <strong>💡 예약어 (Keyword)</strong><br>
+                - <code>print</code>와 같이 특정한 의미가 약속된 단어를 예약어라고 합니다.<br>
+                - 특별한 의미가 있어 미리 역할이 정해져 있는 단어입니다.<br>
+                - 다른 목적으로 사용할 수 없으며 <code>print</code>, <code>input</code>, <code>if</code>, <code>while</code>, <code>for</code> 등이 있습니다.
+            </div>
+        </section>
+
+        <h2>1) 문자열 출력하기-1</h2>
+        <section class="card">
+            <p>출력할 문자열을 큰 따옴표(<code>"</code>) 또는 작은 따옴표(<code>'</code>)로 묶어줍니다.</p>
+            <div class="code-container">
+                <div class="code-body">print("Hello world~!!!")
+print('Hi~ Python')</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">Hello world~!!!<br>Hi~ Python</div>
+
+            <p style="color:var(--danger); margin-top: 40px;">⚠️ 따옴표 없이 출력할 메시지를 입력하면 에러가 발생합니다.</p>
+            <div class="code-container" style="border-color: #fab1a0;">
+                <div class="code-body">print(hello world)</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">에러 결과 확인</button>
+            <div class="output-box" style="color:#e74c3c; background: #fff;">SyntaxError: invalid syntax</div>
+
+            <div class="quiz-card">
+                <div class="quiz-title">실습 문제</div>
+                <li class="quiz-item">(1) 1개 인수를 사용하여 "반가워 파이썬"를 출력하세요.</li>
+                <li class="quiz-item">(2) 2개 인수를 사용하여 "오늘은 즐거워"를 출력하세요.</li>
+            </div>
+        </section>
+
+        <h2>2) 작은 따옴표 또는 큰 따옴표 출력하기</h2>
+        <section class="card">
+            <p>✅ 문자열 내부에 따옴표 기호 자체를 포함하고 싶을 때 사용합니다.</p>
+            
+            <h3>큰 따옴표(") 출력할 때는 작은 따옴표(')로 묶기</h3>
+            <div class="code-container">
+                <div class="code-body">print(' "Hello world~!!!" ')</div>
+            </div>
+
+            <h3>작은 따옴표(') 출력할 때는 큰 따옴표(")로 묶기</h3>
+            <div class="code-container">
+                <div class="code-body">print(" 'Hello world~!!!' ")</div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-title">문장 완성하기</div>
+                <li class="quiz-item">(1) 나는 '파이썬'을 좋아해</li>
+                <li class="quiz-item">(2) 만나면 "안녕"이라고 인사하기</li>
+            </div>
+
+            <div class="info-box">
+                <strong>📌 참고: 이스케이프 코드(\' 또는 \") 사용</strong>
+                <p>따옴표 앞에 역슬래시(<code>\</code>)를 붙이면 따옴표를 문자로 인식합니다.</p>
+                <div class="code-body" style="background:none; padding:10px 0;">print("Python\'s favorite subject.")
+print("\"나는 파이썬을 좋아해\"")</div>
+            </div>
+        </section>
+
+        <h2>3) 숫자 출력하기</h2>
+        <section class="card">
+            <p>✅ 숫자는 따옴표 없이 입력하며, 사칙연산을 수행할 수 있습니다.</p>
+            <div class="code-container">
+                <div class="code-body">print(2+2)
+print(3*5)
+print(5/3)
+print(10-2)</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">4<br>15<br>1.6666666666666667<br>8</div>
+
+            <div class="quiz-card">
+                <div class="quiz-title">산술 연산 퀴즈</div>
+                <li class="quiz-item">(1) 120 + 2350</li>
+                <li class="quiz-item">(2) 3 + 5 * 3 - 4</li>
+                <li class="quiz-item">(3) 100 / 5 + 5</li>
+                <li class="quiz-item">(4) 10 // 3 (몫 구하기)</li>
+                <li class="quiz-item">(5) 25 / 4</li>
+                <li class="quiz-item">(6) 3 ** 2 (거듭제곱)</li>
+                <li class="quiz-item">(7) 33의 2제곱을 7로 나눈 나머지 출력하기</li>
+            </div>
+        </section>
+
+        <h2>4) 문자+숫자(연산식) 출력하기</h2>
+        <section class="card">
+            <p>✅ 문자와 숫자(연산식)를 함께 출력하려면 <strong>쉼표(,)</strong>로 연결합니다.</p>
+            <div class="code-container">
+                <div class="code-body">print("1 더하기 1은", 1+1, "이다")</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">1 더하기 1은 2 이다</div>
+
+            <div class="info-box">
+                <strong>💡 꿀팁: <code>int()</code> 함수</strong><br>
+                - <code>int()</code>는 소수를 정수로 변환(소수점 아래 버림)해줍니다.<br>
+                예: <code>print(int(5/3))</code> 결과는 <code>1</code>이 됩니다.
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-title">문장 결합 챌린지</div>
+                <li class="quiz-item">(1) 1 빼기 1은 0 이다</li>
+                <li class="quiz-item">(2) 1 곱하기 1은 1 이다</li>
+                <li class="quiz-item">(3) 1 나누기 1은 1 이다</li>
+            </div>
+
+            <div class="interactive-quiz">
+                <div class="quiz-title" style="color:#16a085;">개념 완벽 체크 (정답을 클릭하세요!)</div>
+                <div class="q-row">(1) 따옴표로 묶으면 <button class="opt-btn" onclick="checkAns(this, true)">문자</button> <button class="opt-btn" onclick="checkAns(this, false)">숫자</button> 로 인식된다.</div>
+                <div class="q-row">(2) 괄호 안에 숫자만 입력하면 (ex. print(1)) 숫자 1이 <button class="opt-btn" onclick="checkAns(this, true)">출력된다</button> <button class="opt-btn" onclick="checkAns(this, false)">출력되지 않는다</button>.</div>
+                <div class="q-row">(3) 괄호 안에 문자만 입력하면 (ex. print(코딩하루)) <button class="opt-btn" onclick="checkAns(this, false)">출력된다</button> <button class="opt-btn" onclick="checkAns(this, true)">출력되지 않는다(에러)</button>.</div>
+                <div class="q-row">(4) 문자와 숫자를 함께 입력하려면 <button class="opt-btn" onclick="checkAns(this, true)">쉼표</button> <button class="opt-btn" onclick="checkAns(this, false)">마침표</button> 로 구분한다.</div>
+                <div class="q-row">(5) print() 안의 값들을 쉼표로 구분하면 <button class="opt-btn" onclick="checkAns(this, true)">한 칸 띄워서</button> <button class="opt-btn" onclick="checkAns(this, false)">붙여서</button> 출력한다.</div>
+                <div class="q-row">(6) 수학 계산이 가능한 데이터는 <button class="opt-btn" onclick="checkAns(this, true)">숫자</button> 이다.</div>
+            </div>
+        </section>
+
+        <h2>5) 공백 출력하기</h2>
+        <section class="card">
+            <div class="info-box" style="background: #fdf2f2; border: 1px solid #fadbd8;">
+                <strong>❓ 인수(Argument)란?</strong><br>
+                - 함수의 괄호 안에 들어가는 값(쉼표로 구분되는 값)을 말합니다.
+            </div>
+
+            <p>1. 문자열 안의 공백은 그대로 출력됩니다.</p>
+            <div class="code-container"><div class="code-body">print("파 이 썬")</div></div>
+
+            <p>2. 쉼표로 구분된 인수는 기본적으로 한 칸의 공백을 만듭니다.</p>
+            <div class="code-container"><div class="code-body">print("파","이","썬")</div></div>
+
+            <p>3. 쉼표 뒤의 물리적 공백은 출력 결과에 영향을 주지 않습니다.</p>
+            <div class="code-container">
+                <div class="code-body">print("파", "이", "썬")
+print("파",    "이",    "썬")</div>
+            </div>
+
+            <p>4. 문자열 내부 공백과 인수 공백이 만나면 간격이 넓어집니다.</p>
+            <div class="code-container"><div class="code-body">print("파 ", "이 ", "썬 ")</div></div>
+        </section>
+
+        <h2>6) 이스케이프 코드</h2>
+        <section class="card">
+            <p>✅ 프로그래밍할 때 사용할 수 있도록 미리 정의해 둔 문자 조합입니다. 주로 출력문을 보기 좋게 정렬하기 위해 사용합니다. 역슬래시(<code>\</code>)는 키보드의 <code>₩</code> 키입니다.</p>
+
+            <p>1. <strong>\n</strong> : 다음 줄(new line)로 줄을 바꿉니다.</p>
+            <div class="code-container"><div class="code-body">print("하이\n파이썬")</div></div>
+
+            <p>2. <strong>\t</strong> : 탭(tab) 문자로 8칸마다 공백을 채웁니다.</p>
+            <div class="code-container"><div class="code-body">print("하이\t파이썬")</div></div>
+
+            <p>3. <strong>\\</strong> : 역슬래시(<code>\</code>) 문자 자체를 출력합니다.</p>
+            <div class="code-container"><div class="code-body">print("하이\\파이썬")</div></div>
+
+            <p>4. <strong>실제 활용 예시</strong> : 메뉴판처럼 정렬된 출력이 가능합니다.</p>
+            <div class="code-container">
+                <div class="code-body">print("아메리카노\t2500원")
+print("카페라떼\t3000원")</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">아메리카노	2500원<br>카페라떼	3000원</div>
+        </section>
+
+        <h2>7) 인수 구분자 설정하기</h2>
+        <section class="card">
+            <h3>7-1) sep 옵션</h3>
+            <p>✅ <strong>sep</strong>은 'separator'의 약자로, 인수 사이의 구분자를 지정합니다. (기본값: 공백 <code>" "</code>)</p>
+            <div class="code-container">
+                <div class="code-body">print("naver", "com", sep=".")
+print("010", "1234", "5678", sep="-")
+print("python", "java", "c++", sep=" vs ")
+print("하이", "파이썬", sep="")</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">naver.com<br>010-1234-5678<br>python vs java vs c++<br>하이파이썬</div>
+
+            <h3>7-2) end 옵션</h3>
+            <p>✅ <strong>end</strong>는 출력 마지막에 무엇을 붙일지 지정합니다. (기본값: 줄바꿈 <code>\n</code>)</p>
+            <div class="code-container">
+                <div class="code-body">print("Hello", end=" ")
+print("World")
+print("Python", end="!")</div>
+            </div>
+            <button class="btn-show" onclick="toggleOutput(this)">결과 확인</button>
+            <div class="output-box">Hello World<br>Python!</div>
+
+            <div class="quiz-card">
+                <div class="quiz-title">sep & end 활용 문제</div>
+                <li class="quiz-item">✅ 다음과 같이 출력되도록 아래 코드를 수정하세요.<br>
+                    <strong>이메일주소 : coding@naver.com</strong><br>
+                    <strong>주소 : 경기도 부천시</strong>
+                </li>
+                <div class="code-container" style="background:#fff; margin-top:10px;">
+                    <div class="code-body">print("이메일주소 : ")
+print("coding")
+print("naver")
+print("com")
+print("주소 : 경기도 부천시")</div>
+                </div>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-title">최종 미션</div>
+                <li class="quiz-item">(1) 옵션(sep, end)을 사용하여 <code>1945-8-15</code>가 출력되도록 프로그램을 작성해주세요.</li>
+                <li class="quiz-item">(2) 두 개의 print문을 사용하여 <code>naver.com</code>이 한 줄에 출력되도록 프로그램을 작성해주세요.</li>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleOutput(btn) {
+            const output = btn.nextElementSibling;
+            if (output.style.display === "block") {
+                output.style.display = "none";
+                btn.innerText = btn.innerText.includes("에러") ? "에러 결과 확인" : "결과 확인";
+            } else {
+                output.style.display = "block";
+                btn.innerText = "결과 숨기기";
+            }
+        }
+
+        function checkAns(btn, isCorrect) {
+            const siblings = btn.parentNode.querySelectorAll('.opt-btn');
+            siblings.forEach(s => s.classList.remove('correct', 'wrong'));
+            if(isCorrect) btn.classList.add('correct');
+            else btn.classList.add('wrong');
+        }
+    </script>
+</body>
+</html>
